@@ -1,0 +1,130 @@
+{% extends "base.html"%}
+    {%block title%}MENU{%endblock%}
+
+{% block content%}
+<!-- HERO SECTION
+
+ <div class="menu-page1">
+    <div class="slider-container" data-aos="fade-up">
+      <div class="slider-bg align" data-aos="fade-up"> </div>
+
+       -->
+
+      <!-- Slide Dots
+      <div class="slide-dots">
+        <div class="dot-small"></div>
+        <div class="dot-large"></div>
+        <div class="dot-small"></div>
+        <div class="dot-small"></div>
+      </div>
+
+       Slider Arrows
+      <div class="slider-arrows">
+        <div class="arrow"><i class="fas fa-chevron-left"></i></div>
+        <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+
+ -->
+
+
+
+<!-- MENU SECTION -->
+<div class="menu-container-main">
+<section class="menu-container" data-aos="fade-up">
+  <h1>Gallery</h1>
+<section id="menu-items"> 
+  <div class="menu-boxes">
+ <!-- 1 -->
+  <a href="{{ url_for('album', album_name='birthday-cake') }}">
+    <div class="menu-cards" data-aos="fade-up"> 
+     <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
+      <div class ="overlay"></div>
+      <h2>Birthday Cake</h2>
+    </div>
+    </a>
+<!-- 2 -->
+    <a href="{{ url_for('album', album_name='wedding-cake') }}">
+    <div class="menu-cards" data-aos="fade-up"> 
+      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
+            <div class ="overlay"></div>
+      <h2>Wedding Cake</h2>
+    </div>
+    </a>
+  <!-- 3 -->
+    <a href="#">
+      <div class="menu-cards" data-aos="fade-up"> 
+      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
+      <div class ="overlay"></div>
+      <h2>Graduation Cake</h2>
+    </div>
+    </a>
+   <!-- 4 -->
+    <a href="#">
+    <div class="menu-cards" data-aos="fade-up"> 
+      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
+      <div class ="overlay"></div>
+      <h2>Anniversary Cake</h2>
+    </div>
+    </a>
+    <!-- 5 -->
+     <a href="#">
+      <div class="menu-cards" data-aos="fade-up"> 
+      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
+      <div class ="overlay"></div>
+      <h2>Anniversary Cake</h2>
+      </div>
+    </a>
+      <!-- 6 -->
+     <a href="#">
+      <div class="menu-cards" data-aos="fade-up"> 
+      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
+      <div class ="overlay"></div>
+      <h2>Gender Reveal Cake</h2>
+      </div>
+    </a>
+  
+      <!-- 7 -->
+     <a href="#">
+      <div class="menu-cards" data-aos="fade-up"> 
+      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
+      <div class ="overlay"></div>
+      <h2>Reunion Cake</h2>
+      </div>
+    </a>
+
+    <!-- 8 -->
+     <a href="#">
+      <div class="menu-cards" data-aos="fade-up"> 
+      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
+      <div class ="overlay"></div>
+      <h2>Minimalist Cake</h2>
+      </div>
+    </a>
+  
+      <!-- 9 -->
+     <a href="#">
+      <div class="menu-cards" data-aos="fade-up"> 
+      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
+      <div class ="overlay"></div>
+      <h2>Printed Edible Cake</h2>
+      </div>
+    </a>
+    
+</section>
+    
+</section>
+
+</div>
+  <!-- JAVASCRIPT -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init();
+</script>
+
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends "base.html"%}
+    {%block title%}HOME{%endblock%}
+
+{% block content%}
+
+<!-- HERO SECTION -->
+ <div class ="home">
+<section class="hero" data-aos="fade-up">
+
+    <img src="{{ url_for('static', filename='images/image1.png')}}" class="main-logo">
+    <div class= "slogan-name" data-aos="fade-up view()">
+    <h1 class="slogan">Sweet Creations Touched by Magic</h1>
+    <div class="buttons-slogan">
+        <!--
+    <button class="btn1" style= "border-style: solid; border-color: #e84393; ">See Menu</button>
+    <button class="btn1" style= "border-style: solid; border-color: #e84393; background: #e84393; color: #ffffff;">Book an Event</button>
+
+-->
+
+        <a href="{{ url_for('gallery') }}" class="btn1" style= "border-style: solid; border-color: #e84393; ">See Menu</a>
+        <a href="{{ url_for('bookings') }}" class="btn1" style= "border-style: solid; border-color: #e84393; background: #e84393; color: #ffffff;">Book an Event</a>
+
+    </div>
+    </div>
+
+</section>
+
+
+<!--
+<div class="banner">
+  <div class="buttons">
+  </div>
+PINK SHAPE 
+<div class="pink-shape"></div>
+</div>
+-->
+
+<!-- WHAT'S NEW SECTION -->
+
+<div data-aos="fade-up" class="what-new">
+    <h1>What’s New</h1>
+</div>
+
+<div class="carousel" >
+
+<div  data-aos="fade-up" class="what-new-cards">
+
+    <div class="card">
+        <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
+        <h2>Chocolate Sponge Cake</h2>
+        <div class="price">₱ 1,800</div>
+        <button class="btn2">Order Now</button>
+    </div>
+
+    <div class="card">
+        <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Triple Chocolate Cake">
+        <h2>Triple Chocolate Cake</h2>
+        <div class="price">₱ 2,000</div>
+        <button class="btn2">Order Now</button>
+    </div>
+
+    <div class="card">
+        <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Truffle Cake">
+        <h2>Chocolate Truffle Cake</h2>
+        <div class="price">₱ 1,799</div>
+        <button class="btn2">Order Now</button>
+    </div>
+
+    <div class="card">
+        <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Truffle Cake">
+        <h2>Chocolate Truffle Cake</h2>
+        <div class="price">₱ 1,799</div>
+        <button class="btn2">Order Now</button>
+    </div>
+
+     <div class="card">
+        <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Truffle Cake">
+        <h2>Chocolate Truffle Cake</h2>
+        <div class="price">₱ 1,799</div>
+        <button class="btn2">Order Now</button>
+    </div>
+    
+</div>
+
+
+
+<!--DUPLICATE -->
+    <div aria-hidden class="what-new-cards" data-aos="fade-up">
+
+    <div class="card">
+        <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
+        <h2>Chocolate Sponge Cake</h2>
+        <div class="price">₱ 1,800</div>
+        <button class="btn2">Order Now</button>
+    </div>
+
+    <div class="card">
+        <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Triple Chocolate Cake">
+        <h2>Triple Chocolate Cake</h2>
+        <div class="price">₱ 2,000</div>
+        <button class="btn2">Order Now</button>
+    </div>
+
+    <div class="card">
+        <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Truffle Cake">
+        <h2>Chocolate Truffle Cake</h2>
+        <div class="price">₱ 1,799</div>
+        <button class="btn2">Order Now</button>
+    </div>
+
+    <div class="card">
+        <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Truffle Cake">
+        <h2>Chocolate Truffle Cake</h2>
+        <div class="price">₱ 1,799</div>
+        <button class="btn2">Order Now</button>
+    </div>
+
+     <div class="card">
+        <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Truffle Cake">
+        <h2>Chocolate Truffle Cake</h2>
+        <div class="price">₱ 1,799</div>
+        <button class="btn2">Order Now</button>
+    </div>
+
+</div>
+
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init();
+</script>
+
+ </div>
+
+{% endblock%}

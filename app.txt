@@ -1,0 +1,105 @@
+from flask import Flask, render_template, request, redirect, url_for
+import mysql.connector
+
+app = Flask(__name__)
+
+# -----------------------------
+# DATABASE CONNECTION (XAMPP MySQL)
+# -----------------------------
+def get_db_connection():
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",        # default XAMPP user
+        password="",        # default is empty
+        database="cakehouse"
+    )
+    return conn
+
+# -----------------------------
+# HOME
+# -----------------------------
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+# -----------------------------
+# MENU / GALLERY
+# -----------------------------
+@app.route('/menu')
+def menu():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM menu")
+    cakes = cursor.fetchall()
+
+    conn.close()
+    return render_template('menu.html', cakes=cakes)
+
+# -----------------------------
+# ORDER
+# -----------------------------
+@app.route('/order', methods=['GET', 'POST'])
+def order():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM menu")
+    cakes = cursor.fetchall()
+
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        cake = request.form['cake']
+        quantity = request.form['quantity']
+        date = request.form['date']
+        message = request.form['message']
+
+        cursor.execute(
+            "INSERT INTO orders (name, email, cake, quantity, date, message) VALUES (%s, %s, %s, %s, %s, %s)",
+            (name, email, cake, quantity, date, message)
+        )
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('home'))
+
+    conn.close()
+    return render_template('order.html', cakes=cakes)
+
+# -----------------------------
+# CONTACT
+# -----------------------------
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['message']
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "INSERT INTO contact (name, email, message) VALUES (%s, %s, %s)",
+            (name, email, message)
+        )
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('home'))
+
+    return render_template('contact.html')
+
+# -----------------------------
+# ABOUT
+# -----------------------------
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+# -----------------------------
+# RUN
+# -----------------------------
+if __name__ == '__main__':
+    app.run(debug=True)
