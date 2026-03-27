@@ -6,9 +6,14 @@ app = Flask(__name__)
 # Defining the albums
 ALBUM = [
     {"name": "birthday-cake", "title": "Birthday Cake", "cover": "cake2.jpg"},
-    {"name": "wedding-cake", "title": "Wedding Cake", "cover": "cake2.jpg"},
-    {"name": "graduation-cake", "title": "Graduation Cake", "cover": "cake2.jpg"},
-    {"name": "anniversary-cake", "title": "Anniversary Cake", "cover": "cake2.jpg"},
+    {"name": "Anniversary-cake", "title": "Anniversary Cake", "cover": "cake2.jpg"},
+    {"name": "Christening-cake", "title": "Christening Cake", "cover": "cake2.jpg"},
+    {"name": "Gender-Reveal-cake", "title": "Gender Reveal Cake", "cover": "cake2.jpg"},
+    {"name": "Graduation-cake", "title": "Graduation Cake", "cover": "cake2.jpg"},
+    {"name": "Minimalist-cake", "title": "Minimalist Cake", "cover": "cake2.jpg"},
+    {"name": "Printed-Edible-cake", "title": "Printed Edible Cake", "cover": "cake2.jpg"},
+    {"name": "Reunion-cake", "title": "Reunion Cake", "cover": "cake2.jpg"},
+    {"name": "Wedding-cake", "title": "Wedding Cake", "cover": "cake2.jpg"}
 ]
 
 # HOME
