@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ album.replace('-', ' ').title() }}
+{% endblock %}
+
+{% block content %}
+<div class="album">
+<h1>{{ album.replace('-', ' ').title() }}</h1>
+
+<section class="gallery">
+  {% for img in images %}
+    <div class="card4" data-aos="fade-up">
+      <img src="{{ url_for('static', filename='images/' + album + '/' + img) }}">
+    </div>
+  {% endfor %}
+</section>
+
+</div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init();
+</script>
+{% endblock %}

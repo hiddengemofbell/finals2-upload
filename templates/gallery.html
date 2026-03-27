@@ -40,82 +40,18 @@
   <h1>Gallery</h1>
 <section id="menu-items"> 
   <div class="menu-boxes">
- <!-- 1 -->
-  <a href="{{ url_for('album', album_name='birthday-cake') }}">
-    <div class="menu-cards" data-aos="fade-up"> 
-     <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
-      <div class ="overlay"></div>
-      <h2>Birthday Cake</h2>
-    </div>
-    </a>
-<!-- 2 -->
-    <a href="{{ url_for('album', album_name='wedding-cake') }}">
-    <div class="menu-cards" data-aos="fade-up"> 
-      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
-            <div class ="overlay"></div>
-      <h2>Wedding Cake</h2>
-    </div>
-    </a>
-  <!-- 3 -->
-    <a href="#">
-      <div class="menu-cards" data-aos="fade-up"> 
-      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
-      <div class ="overlay"></div>
-      <h2>Graduation Cake</h2>
-    </div>
-    </a>
-   <!-- 4 -->
-    <a href="#">
-    <div class="menu-cards" data-aos="fade-up"> 
-      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
-      <div class ="overlay"></div>
-      <h2>Anniversary Cake</h2>
-    </div>
-    </a>
-    <!-- 5 -->
-     <a href="#">
-      <div class="menu-cards" data-aos="fade-up"> 
-      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
-      <div class ="overlay"></div>
-      <h2>Anniversary Cake</h2>
-      </div>
-    </a>
-      <!-- 6 -->
-     <a href="#">
-      <div class="menu-cards" data-aos="fade-up"> 
-      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
-      <div class ="overlay"></div>
-      <h2>Gender Reveal Cake</h2>
-      </div>
-    </a>
-  
-      <!-- 7 -->
-     <a href="#">
-      <div class="menu-cards" data-aos="fade-up"> 
-      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
-      <div class ="overlay"></div>
-      <h2>Reunion Cake</h2>
-      </div>
-    </a>
 
-    <!-- 8 -->
-     <a href="#">
+    {% for album in albums %}
+    <a href="{{ url_for('album', album_name=album.name) }}">
       <div class="menu-cards" data-aos="fade-up"> 
-      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
-      <div class ="overlay"></div>
-      <h2>Minimalist Cake</h2>
+        <img src="{{ url_for('static', filename='images/' + album.cover) }}">
+        <div class="overlay"></div>
+        <h2>{{ album.title }}</h2>
       </div>
     </a>
-  
-      <!-- 9 -->
-     <a href="#">
-      <div class="menu-cards" data-aos="fade-up"> 
-      <img src="{{ url_for('static', filename='images/cake2.jpg')}}" alt="Chocolate Sponge Cake">
-      <div class ="overlay"></div>
-      <h2>Printed Edible Cake</h2>
-      </div>
-    </a>
-    
+    {% endfor %}
+
+  </div>
 </section>
     
 </section>
