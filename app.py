@@ -29,7 +29,7 @@ def gallery():
     return render_template('gallery.html', albums=ALBUM)
 
 
-# ALBUM PAGE (FIXED)
+# ALBUM PAGE
 @app.route('/gallery/<album_name>')
 def album(album_name):
     album_names = [a["name"] for a in ALBUM]
