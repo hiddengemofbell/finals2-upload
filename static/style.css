@@ -755,21 +755,26 @@ clip-path:polygon(0 0,50% 100%,100% 0);
     color: rgba(0,0,0,0.20)
 }
 
-.booking-button button{
+.booking-page button{
     justify-content: center;
     align-items: center;
     display: flex;
     background-color: #ffffff00;
-    color: #000000;
-    border: 1px solid rgba(0,0,0,0.10);
+    color: rgba(0,0,0);
+    border: 1px solid rgb(0,0,0);
+    opacity: 0.20;
     padding: 30px 530px;
     font-weight: bold;
     border-radius: 6px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: opacity 0.3s ease;
     font-size: 30px;
 }
 
-.booking-button button:hover{
-    opacity: 70%;
+.booking-page button:hover{
+    opacity: 1;
+}
+
+.booking-page button:active{
+    transform: scale(0.95);
 }
