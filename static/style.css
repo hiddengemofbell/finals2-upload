@@ -743,3 +743,33 @@ clip-path:polygon(0 0,50% 100%,100% 0);
     align-items: center;
     text-align: center;
 }
+
+.booking-page{
+    justify-items: center;
+    padding-bottom: 30px;
+}
+
+.booking-page h1{
+    font-family: Poppins;
+    font-size: 40px;
+    color: rgba(0,0,0,0.20)
+}
+
+.booking-button button{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #ffffff00;
+    color: #000000;
+    border: 1px solid rgba(0,0,0,0.10);
+    padding: 30px 530px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 30px;
+}
+
+.booking-button button:hover{
+    opacity: 70%;
+}
