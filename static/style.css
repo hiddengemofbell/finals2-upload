@@ -778,3 +778,17 @@ clip-path:polygon(0 0,50% 100%,100% 0);
 .booking-page button:active{
     transform: scale(0.95);
 }
+
+.about-us-page{
+    padding: 50px 60px 10px;
+}
+
+.about-history{
+    font-family: Poppins;
+    font-size: 27px;
+    color: #ffffff;
+    background-color: #FCC5DF;
+    padding: 0.03px 1px;
+    text-align: center;
+    border-radius: 10px;
+}
