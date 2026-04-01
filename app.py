@@ -60,12 +60,6 @@ def contact():
     return render_template('contact.html')
 
 
-# CALENDAR
-@app.route('/calendar')
-def calendar():
-    return render_template('calendar.html')
-
-
 # ABOUT US
 @app.route('/about')
 def about():

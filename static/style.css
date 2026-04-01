@@ -781,6 +781,7 @@ clip-path:polygon(0 0,50% 100%,100% 0);
 
 .about-us-page{
     padding: 50px 60px 10px;
+    
 }
 
 .about-history{
@@ -790,5 +791,65 @@ clip-path:polygon(0 0,50% 100%,100% 0);
     background-color: #FCC5DF;
     padding: 0.03px 1px;
     text-align: center;
-    border-radius: 10px;
+}
+
+.about-history-body{
+ display: flex;
+}
+
+.about-history-page img{
+    aspect-ratio: 1/1;
+    width: 250px;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.about-history-page{
+    width: 300px;
+    padding: 10px 50px;
+    background-color: #FEEBF4;
+}
+
+.history-story{
+    text-align: center;
+    font-family: Poppins;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+.history-story h4{
+    font-family: Francois One;
+    font-size: 50px;
+    margin-bottom: 6px;
+    margin-top: 30px;
+    color: #FF7DB0;
+    font-weight: 15;
+}
+
+
+.history-story p{
+    font-size: 30px;
+    text-align: justify;
+}
+
+.history-header-pt2 h1{
+    font-size: 30px;
+    text-align: left;
+    margin: 20px 50px;
+}
+
+.contact-header1 p{
+    font-family: Poppins;
+    font-size: 37px;
+    text-align: center;
+    margin:0px;
+    padding-top: 20px;
+}
+.contact-header1 img{
+    display: flex;
+    height: 500px;
+    width: 1000px;
+    margin: 10px 250px;
+    align-items: center;
+    justify-content: center;
 }

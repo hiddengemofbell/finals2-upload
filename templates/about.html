@@ -4,19 +4,68 @@
 {% block content%}
 <div class="about-us-page">
     <div class="about-history">
-        <h1>Liza's Cake House</h1>
+        <h1 data-aos="fade-down">Liza's Cake House</h1>
     </div>
     <div class="about-history-body">    <!--Alin it here.-->
-        <div>
+        <div class="about-history-page">
+            <img src="{{ url_for('static', filename='images/cake3.png')}} " alt="Featured Cake" data-aos="fade-right">
+            <img src="{{ url_for('static', filename='images/cake4.png')}} " alt="Featured Cake" data-aos="fade-right">
+            <img src="{{ url_for('static', filename='images/cake5.png')}} " alt="Featured Cake" data-aos="fade-right">
             <!-- Three images with the background color-->
         </div>
 
-        <div>
+        <div class="history-story">
+            <h4 data-aos="fade-left">About Liza’s Cake House</h4>
+            <p data-aos="fade-left">Liza's Cake House is a local cake shop located in Siniloan that 
+                specializes in creating beautiful and delicious cakes for different 
+                kinds of celebrations. The shop offers customized cakes, cupcakes, brownies, 
+                and other sweet treats that are perfect for birthdays, weddings, anniversaries, 
+                and other special occasions.
+            <br><br>The goal of Liza's Cake House is to bring happiness to customers by making cakes 
+            that are not only tasty but also creatively designed. Each cake is carefully prepared with 
+            attention to detail so that every celebration becomes more special and memorable. Over 
+            the years, the shop has become well known in the community for its quality products, 
+            creative designs, and friendly service.</p>
             <!-- The about history page -->
         </div>
     </div>
 
     <!--I can duplcate it nalang siguro. gonna do it nalang bukas waaah-->
+
+        <div class="about-history">
+            <div class="history-header-pt2" data-aos="fade-down">
+        <h1>Designer cakes fit for your celebration! <br>We customize cakes, cupcakes, brownies and other party sweets.</h1>
+            </div>
+    </div>
+    <div class="about-history-body">    <!--Alin it here.-->
+
+        <div class="history-story">
+            <h4 data-aos="fade-right">Our History</h4>
+            <p data-aos="fade-right">Liza's Cake House was established in 1994 in Siniloan. It started as a small home-based
+                baking business created by a passionate baker who loved making cakes for family gatherings
+                and local celebrations. Because many people liked the taste and design of the cakes, the small
+                business slowly grew through word-of-mouth and recommendations from satisfied customers.
+            <br><br>As the years passed, the shop expanded its menu and began accepting more customized cake
+            orders for events such as weddings, debuts, and birthdays. With dedication, creativity, and consistent quality,
+            Liza's Cake House built a strong reputation in the community.
+            <br><br>Today, after many years since it started in 1994, the shop continues to serve customers with
+            unique cake designs and delicious baked goods. It remains a trusted cake shop in Siniloan, bringing sweetness
+            and joy to many celebrations.</p>
+            <!-- The about history page -->
+        </div>
+    <div class="about-history-page">
+            <img src="{{ url_for('static', filename='images/cake3.png')}} " alt="Featured Cake" data-aos="fade-left">
+            <img src="{{ url_for('static', filename='images/cake4.png')}} " alt="Featured Cake" data-aos="fade-left">
+            <img src="{{ url_for('static', filename='images/cake5.png')}} " alt="Featured Cake" data-aos="fade-left">
+            <!-- Three images with the background color-->
+        </div>
+        
+    </div>
 </div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init();
+</script>
 
 {% endblock %}
