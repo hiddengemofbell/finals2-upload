@@ -3,8 +3,23 @@
 
 {% block content%}
 <div class="booking-page">
-<h1>You haven't booked anything yet.</h1>
-    <button>+ Book an event</button>
+
+    {% if bookings %}
+        <div class="booking-list">
+            {% for b in bookings %}
+                <div class="card">
+                    <h3>{{ b.name }}</h3>
+                    <p>{{ b.email }}</p>
+                </div>
+            {% endfor %}
+                
+        </div>
+    {% else %}
+        <h1>You haven't booked anything yet.</h1>
+
+    {% endif %}
+
+<a href="{{ url_for('book') }}">+ Book an event</a>
 
 </div>
 

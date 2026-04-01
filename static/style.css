@@ -747,15 +747,15 @@ clip-path:polygon(0 0,50% 100%,100% 0);
 .booking-page{
     justify-items: center;
     padding-bottom: 30px;
+      font-family: Poppins;
 }
 
 .booking-page h1{
-    font-family: Poppins;
     font-size: 40px;
     color: rgba(0,0,0,0.20)
 }
 
-.booking-page button{
+.booking-page a{
     justify-content: center;
     align-items: center;
     display: flex;
@@ -771,11 +771,11 @@ clip-path:polygon(0 0,50% 100%,100% 0);
     font-size: 30px;
 }
 
-.booking-page button:hover{
+.booking-page a:hover{
     opacity: 1;
 }
 
-.booking-page button:active{
+.booking-page a:active{
     transform: scale(0.95);
 }
 

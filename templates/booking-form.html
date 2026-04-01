@@ -1,0 +1,11 @@
+{% extends "base.html"%}
+    {%block title%}BOOKING FORM{%endblock%}
+<h1>Book a Cake</h1>
+
+{% block content%}
+<form method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="cake" placeholder="name@example.com" required>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

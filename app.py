@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, request, redirect, url_for, redirect, url_for
+
 
 app = Flask(__name__)
 
@@ -49,9 +50,22 @@ def album(album_name):
     )
 
 # BOOKINGS
+bookings = []
 @app.route('/bookings')
 def bookings():
     return render_template('bookings.html')
+
+@app.route('/book', methods=['GET', 'POST'])
+def book():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+
+        bookings.append({'name': name, 'email': email})
+        return redirect(url_for('bookings'))
+
+
+    return render_template('booking-form.html', bookings=bookings)
 
 
 # CONTACT
