@@ -1,11 +1,116 @@
-{% extends "base.html"%}
-    {%block title%}BOOKING FORM{%endblock%}
-<h1>Book a Cake</h1>
+{% extends "base.html" %} {% block title %}BOOKING DETAILS{% endblock %} {% block content %}
+<div class="booking-page-container">
+    <div class="booking-title-bar">
+        <div>
+            <h1>Booking Details</h1>
+            <p>Personal Information | Pickup Date | Pickup Time</p>
+        </div>
+    </div>
 
-{% block content%}
-<form method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="cake" placeholder="name@example.com" required>
-    <button type="submit">Submit</button>
-</form>
+    {% if error %}
+    <div class="booking-error">{{ error }}</div>
+    {% endif %} {% if blocked_dates %}
+    <div class="blocked-dates">
+        <p><strong>Fully booked dates:</strong></p>
+        <ul>
+            {% for date in blocked_dates %}
+            <li>{{ date }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="booking-grid">
+        <aside class="booking-sidebar">
+            <div class="booking-card">
+                <h2>Book Your Cake</h2>
+                <p>Please follow the steps to complete your pickup reservation at Liza's Cake House.</p>
+                <ul>
+                    <li>1. Enter Personal Information</li>
+                    <li>2. Select Pickup Date</li>
+                    <li>3. Choose Pickup Time (from 08:00 onward)</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="booking-main">
+            <section class="personal-info-panel">
+                <div class="panel-header">
+                    <h2>Personal Information</h2>
+                </div>
+                <form method="POST" action="{{ url_for('book', month=month, year=year) }}" class="booking-form">
+                    <div class="input-group">
+                        <label>Name</label>
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" placeholder="name@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phone" placeholder="09XX-XXX-XXXX">
+                    </div>
+                    <div class="input-group">
+                        <label>Social Media (Optional)</label>
+                        <input type="text" name="social" placeholder="Instagram / Facebook">
+                    </div>
+                    <div class="input-group">
+                        <label>Pickup Date</label>
+                        <input type="date" name="event_date" min="{{ today }}">
+                    </div>
+                    <div class="input-group">
+                        <label>Pickup Time</label>
+                        <input type="time" name="event_time" min="08:00">
+                    </div>
+                    <div class="input-group">
+                        <label>Notes</label>
+                        <textarea name="notes" placeholder="Additional details"></textarea>
+                    </div>
+                    <button type="submit" class="booking-submit">DONE</button>
+                </form>
+            </section>
+
+            {% if show_calendar %}
+            <section class="calendar-panel">
+                <div class="panel-header">
+                    <h2>Set a Date</h2>
+                    <p>Red days are fully booked for this month.</p>
+                </div>
+                <div class="calendar-card">
+                    <div class="calendar-header">
+                        {% if has_prev %}
+                        <a href="{{ url_for('book', month=prev_month, year=prev_year) }}" class="calendar-nav">&#8249;</a> {% else %}
+                        <span class="calendar-nav disabled">&#8249;</span> {% endif %}
+                        <div>{{ month_name }} {{ year }}</div>
+                        <a href="{{ url_for('book', month=next_month, year=next_year) }}" class="calendar-nav">&#8250;</a>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day-name">Sun</div>
+                        <div class="calendar-day-name">Mon</div>
+                        <div class="calendar-day-name">Tue</div>
+                        <div class="calendar-day-name">Wed</div>
+                        <div class="calendar-day-name">Thu</div>
+                        <div class="calendar-day-name">Fri</div>
+                        <div class="calendar-day-name">Sat</div>
+                        {% for week in month_days %} {% for day in week %} {% if day == 0 %}
+                        <div class="calendar-day empty"></div>
+                        {% else %} {% set count = bookings_by_day.get(day, 0) %}
+                        <div class="calendar-day {% if count >= max_bookings_per_date %}full{% elif count > 0 %}booked{% endif %}">
+                            <span>{{ day }}</span> {% if count >= max_bookings_per_date %}
+                            <small>FULL</small> {% elif count > 0 %}
+                            <small>{{ count }} booked</small> {% endif %}
+                        </div>
+                        {% endif %} {% endfor %} {% endfor %}
+                    </div>
+                </div>
+            </section>
+            {% else %}
+            <div class="calendar-info">
+                <p>No dates are fully booked for {{ month_name }} {{ year }} yet.</p>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+</div>
 {% endblock %}

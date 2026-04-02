@@ -1,26 +1,28 @@
-{% extends "base.html"%}
-    {%block title%}BOOKINGS{%endblock%}
-
-{% block content%}
+{% extends "base.html" %} {% block title %}BOOKINGS{% endblock %} {% block content %}
 <div class="booking-page">
+    <h1>Your Bookings</h1>
 
     {% if bookings %}
-        <div class="booking-list">
-            {% for b in bookings %}
-                <div class="card">
-                    <h3>{{ b.name }}</h3>
-                    <p>{{ b.email }}</p>
-                </div>
-            {% endfor %}
-                
+    <div class="booking-list">
+        {% for b in bookings %}
+        <div class="card">
+            <h3>{{ b.name }}</h3>
+            <p><strong>Email:</strong> {{ b.email }}</p>
+            {% if b.phone %}
+            <p><strong>Phone:</strong> {{ b.phone }}</p>{% endif %} {% if b.address %}
+            <p><strong>Address:</strong> {{ b.address }}</p>{% endif %} {% if b.social %}
+            <p><strong>Social:</strong> {{ b.social }}</p>{% endif %} {% if b.event_date %}
+            <p><strong>Event Date:</strong> {{ b.event_date }}</p>{% endif %} {% if b.event_time %}
+            <p><strong>Event Time:</strong> {{ b.event_time }}</p>{% endif %} {% if b.notes %}
+            <p><strong>Notes:</strong> {{ b.notes }}</p>{% endif %}
         </div>
+        {% endfor %}
+    </div>
     {% else %}
-        <h1>You haven't booked anything yet.</h1>
-
+    <h1>You haven't booked anything yet.</h1>
     {% endif %}
 
-<a href="{{ url_for('book') }}">+ Book an event</a>
-
+    <a href="{{ url_for('book') }}">+ Book an event</a>
 </div>
 
 {% endblock %}

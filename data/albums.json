@@ -1,0 +1,14 @@
+[
+  {
+    "name": "birthday-cake",
+    "title": "Birthday Cake",
+    "cover": "cake2.jpg",
+    "description": "Custom birthday cakes for every age and theme."
+  },
+  {
+    "name": "wedding-cake",
+    "title": "Wedding Cake",
+    "cover": "cake2.jpg",
+    "description": "Elegant wedding cakes for ceremonies and receptions."
+  }
+]
