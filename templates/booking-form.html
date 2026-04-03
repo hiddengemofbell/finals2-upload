@@ -105,6 +105,12 @@
                     </div>
                 </div>
             </section>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
             {% else %}
             <div class="calendar-info">
                 <p>No dates are fully booked for {{ month_name }} {{ year }} yet.</p>
@@ -113,4 +119,6 @@
         </main>
     </div>
 </div>
+<!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 {% endblock %}

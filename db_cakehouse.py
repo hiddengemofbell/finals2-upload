@@ -8,3 +8,4 @@ conn = mysql.connector.connect(
 )
 
 cursor = conn.cursor()
+print("Successfuly Connected.")
