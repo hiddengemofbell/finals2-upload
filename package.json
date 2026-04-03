@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/hiddengemofbell/finals2-upload/issues"
   },
-  "homepage": "https://github.com/hiddengemofbell/finals2-upload#readme"
+  "homepage": "https://github.com/hiddengemofbell/finals2-upload#readme",
+  "keywords": [],
+  "dependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "tailwindcss": "^4.2.2"
+  }
 }
