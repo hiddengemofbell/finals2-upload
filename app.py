@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from flask import Flask, render_template, abort, request, redirect, url_for
 
 app = Flask(__name__)
-MAX_BOOKINGS_PER_DATE = 20
+MAX_BOOKINGS_PER_DATE = 3
 
 # Defining the albums
 ALBUM = [

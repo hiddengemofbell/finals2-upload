@@ -236,7 +236,7 @@ clip-path:polygon(0 0,50% 100%,100% 0);
 /* IMAGE */
 
 .card img {
-    width: 100%;
+    width: 70%;
     aspect-ratio: 1 / 1;
     /* forces square */
     object-fit: cover;
@@ -1275,4 +1275,19 @@ clip-path:polygon(0 0,50% 100%,100% 0);
 .calendar-day.selected {
     background: #c72575;
     color: white;
+}
+
+.visit-us {
+    margin-left: 250px;
+    font-family: Poppins;
+}
+
+.visit-us h6{
+    font-weight: bold;
+    font-size: 30px;
+    margin: 0px
+}
+
+.visit-us p {
+    margin: 0px;
 }
