@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% block title %}Login | Liza's Cake House{% endblock %} {% block content %}
+<section class="login-section">
+    <div class="login-card">
+        <div class="auth-tabs">
+            <button type="button" class="tab-button" data-target="login-form">Login</button>
+            <button type="button" class="tab-button" data-target="signup-form">Sign Up</button>
+        </div>
+
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %} {% if message %}
+        <div class="success-message">{{ message }}</div>
+        {% endif %}
+
+        <form id="login-form" class="auth-form" method="post" action="{{ url_for('login') }}">
+            <input type="hidden" name="form_type" value="login">
+            <h1>Login</h1>
+            <p>Use an account to access the dashboard.</p>
+
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" name="email" placeholder="Email" required>
+
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" placeholder="Password" required>
+
+            <button type="submit">Sign In</button>
+        </form>
+
+        <form id="signup-form" class="auth-form" method="post" action="{{ url_for('login') }}">
+            <input type="hidden" name="form_type" value="signup">
+            <h1>Sign Up</h1>
+            <p>Create a new account for booking and dashboard access.</p>
+
+            <label for="signup-name">Name</label>
+            <input type="text" id="signup-name" name="name" placeholder="Full Name" required>
+
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" name="email" placeholder="Email" required>
+
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" placeholder="Password" required>
+
+            <label for="signup-confirm-password">Confirm Password</label>
+            <input type="password" id="signup-confirm-password" name="confirm_password" placeholder="Confirm Password" required>
+
+            <button type="submit">Create Account</button>
+        </form>
+
+        <div class="login-hint">
+            <p>Sample accounts:</p>
+            <ul>
+                <li>Admin: admin@example.com / admin123</li>
+                <li>Staff: staff@example.com / staff123</li>
+                <li>User: customer@example.com / user123</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabs = document.querySelectorAll('.tab-button');
+        const forms = document.querySelectorAll('.auth-form');
+        const activeTab = '{{ active_tab or "login" }}';
+
+        function showForm(targetId) {
+            forms.forEach(form => {
+                form.classList.toggle('active', form.id === targetId);
+            });
+            tabs.forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.target === targetId);
+            });
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => showForm(tab.dataset.target));
+        });
+
+        showForm(activeTab);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,625 @@
+{% extends 'base.html' %} {% block title %}{{ title }} | Liza's Cake House{% endblock %} {% block content %}
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body,
+    div,
+    span,
+    td,
+    th,
+    input,
+    select,
+    button {
+        font-family: var(--font-sans);
+    }
+    
+    .nav {
+        background: #e91e8c;
+        padding: 0 20px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    }
+    
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .nav-logo {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    
+    .nav-logo-inner {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #e91e8c;
+        border: 2px solid #f8bbd9;
+    }
+    
+    .nav-title {
+        color: #fff;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+    
+    .nav-link {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 12px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    
+    .nav-link.active {
+        color: #fff;
+        font-weight: 500;
+        border-bottom: 1.5px solid #fff;
+        padding-bottom: 2px;
+    }
+    
+    .page {
+        padding: 20px;
+    }
+    
+    .page-title {
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--color-text-primary);
+        margin-bottom: 16px;
+    }
+    
+    .stat-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+    
+    .stat-chip {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--color-background-primary);
+        border: 0.5px solid var(--color-border-tertiary);
+        border-radius: 99px;
+        padding: 6px 14px;
+    }
+    
+    .stat-icon {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .stat-label {
+        font-size: 12px;
+        color: var(--color-text-secondary);
+    }
+    
+    .stat-val {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--color-text-primary);
+    }
+    
+    .chart-card {
+        background: var(--color-background-primary);
+        border: 0.5px solid var(--color-border-tertiary);
+        border-radius: var(--border-radius-lg);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+    }
+    
+    .chart-card-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--color-text-primary);
+        margin-bottom: 12px;
+    }
+    
+    .orders-card {
+        background: var(--color-background-primary);
+        border: 0.5px solid var(--color-border-tertiary);
+        border-radius: var(--border-radius-lg);
+        padding: 16px 20px;
+    }
+    
+    .orders-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .orders-header h2 {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--color-text-primary);
+    }
+    
+    .orders-header input {
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: var(--border-radius-md);
+        border: 0.5px solid var(--color-border-secondary);
+        background: var(--color-background-primary);
+        color: var(--color-text-primary);
+        width: 160px;
+    }
+    
+    .filter-row {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+    }
+    
+    .fbtn {
+        font-size: 11px;
+        padding: 3px 10px;
+        border-radius: 99px;
+        border: 0.5px solid var(--color-border-secondary);
+        background: transparent;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+    }
+    
+    .fbtn.on {
+        background: #e91e8c;
+        color: #fff;
+        border-color: #e91e8c;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+    
+    th {
+        font-size: 11px;
+        color: var(--color-text-secondary);
+        font-weight: 500;
+        text-align: left;
+        padding: 6px 8px;
+        border-bottom: 0.5px solid var(--color-border-tertiary);
+        text-transform: uppercase;
+        letter-spacing: .04em;
+    }
+    
+    td {
+        font-size: 12px;
+        color: var(--color-text-primary);
+        padding: 10px 8px;
+        border-bottom: 0.5px solid var(--color-border-tertiary);
+        vertical-align: middle;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    tr:last-child td {
+        border-bottom: none;
+    }
+    
+    tr:hover td {
+        background: var(--color-background-secondary);
+    }
+    
+    .status-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .si-done {
+        background: #fce4ec;
+    }
+    
+    .si-check {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #e91e8c;
+    }
+    
+    .si-pend {
+        background: #fff3e0;
+    }
+    
+    .si-pend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #fb8c00;
+    }
+    
+    .si-bake {
+        background: #e8f5e9;
+    }
+    
+    .si-bake-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #43a047;
+    }
+    
+    .more-btn {
+        display: flex;
+        gap: 3px;
+        align-items: center;
+        cursor: pointer;
+    }
+    
+    .more-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--color-text-secondary);
+    }
+    
+    .pg {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 12px;
+    }
+    
+    .pg span {
+        font-size: 11px;
+        color: var(--color-text-secondary);
+    }
+    
+    .pg-btns {
+        display: flex;
+        gap: 4px;
+    }
+    
+    .pg-btn {
+        font-size: 11px;
+        padding: 3px 9px;
+        border-radius: var(--border-radius-md);
+        border: 0.5px solid var(--color-border-secondary);
+        background: transparent;
+        color: var(--color-text-primary);
+        cursor: pointer;
+    }
+    
+    .pg-btn.on {
+        background: #e91e8c;
+        color: #fff;
+        border-color: #e91e8c;
+    }
+    
+    :root {
+        --font-sans: 'Poppins', sans-serif;
+        --color-text-primary: #333;
+        --color-text-secondary: #666;
+        --color-background-primary: #fff;
+        --color-background-secondary: #f9f9f9;
+        --color-border-tertiary: #e0e0e0;
+        --color-border-secondary: #ccc;
+        --border-radius-lg: 12px;
+        --border-radius-md: 6px;
+    }
+</style>
+
+<div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;">
+
+    <div class="nav">
+        <div class="nav-brand">
+            <div class="nav-logo">
+                <div class="nav-logo-inner"></div>
+            </div>
+            <span class="nav-title">Liza's Cake House</span>
+        </div>
+        <div class="nav-links">
+            <span class="nav-link active">Dashboard</span>
+            <span class="nav-link">Gallery</span>
+            <span class="nav-link">Bookings</span>
+            <span class="nav-link">Calendar</span>
+            <span class="nav-link">Admin panel</span>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="page-title">Dashboard</div>
+
+        <div class="stat-row" id="statRow"></div>
+
+        <div class="chart-card">
+            <div class="chart-card-title">Sales overview</div>
+            <div style="position:relative;width:100%;height:220px;">
+                <canvas id="salesChart" role="img" aria-label="Line chart of monthly cake order sales over the year">Monthly sales data for the cake shop.</canvas>
+            </div>
+        </div>
+
+        <div class="orders-card">
+            <div class="orders-header">
+                <h2>Recent orders</h2>
+                <input type="text" id="srch" placeholder="Search customer or cake..." oninput="render()">
+            </div>
+            <div class="filter-row" id="fRow"></div>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:110px;">Customer</th>
+                            <th style="width:110px;">Cake type</th>
+                            <th style="width:80px;">Pickup date</th>
+                            <th style="width:80px;">Pickup time</th>
+                            <th style="width:70px;">Total</th>
+                            <th style="width:60px;">Status</th>
+                            <th style="width:50px;">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+            <div class="pg">
+                <span id="pgInfo"></span>
+                <div class="pg-btns" id="pgBtns"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+    const customers = ["Zse Secretario", "Belle Bravo", "Tim Tapado", "Carlo Watson", "John Santos", "Ana Reyes", "Maria Lim", "Grace Uy", "Rico Bautista", "Cris Navarro", "Diana Lopez", "Felix Cruz", "Iris Gomez", "Leo Padilla", "Joy Flores", "Noel Cruz", "Sam Abad", "Tina Vega", "Paz Torres", "Mark Aquino"];
+    const cakeTypes = ["Birthday", "Customized", "Wedding", "Christening", "Anniversary", "Graduation", "Debut", "Baby Shower"];
+    const pickupTimes = ["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM"];
+    const statuses = ["done", "pending", "baking"];
+    const sw = [0.5, 0.3, 0.2];
+
+    function ri(a, b) {
+        return Math.floor(Math.random() * (b - a + 1)) + a;
+    }
+
+    function rc(a) {
+        return a[Math.floor(Math.random() * a.length)];
+    }
+
+    function wSt() {
+        let r = Math.random(),
+            c = 0;
+        for (let i = 0; i < statuses.length; i++) {
+            c += sw[i];
+            if (r < c) return statuses[i];
+        }
+        return "done";
+    }
+
+    let orders = {
+        {
+            recent_orders | tojson
+        }
+    };
+    orders = orders.map(o => ({
+        id: o.id || Math.random(),
+        customer: o.name || 'Unknown',
+        cake: o.cake_type || 'Birthday',
+        dateStr: o.event_date ? new Date(o.event_date).toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: '2-digit'
+        }) : '—',
+        date: o.event_date ? new Date(o.event_date) : new Date(),
+        time: o.event_time || '—',
+        total: o.total || ri(400, 3500),
+        status: o.status || wSt()
+    }));
+
+    function renderStats() {
+        let total = orders.length;
+        let revenue = orders.filter(o => o.status !== "cancelled").reduce((s, o) => s + o.total, 0);
+        let popular = Object.entries(orders.reduce((m, o) => {
+            m[o.cake] = (m[o.cake] || 0) + 1;
+            return m;
+        }, {})).sort((a, b) => b[1] - a[1])[0];
+        let birthday = orders.filter(o => o.cake === "Birthday").length;
+        let pending = orders.filter(o => o.status === "pending").length;
+        let stats = [{
+            label: "Total booking",
+            val: total,
+            bg: "#fce4ec",
+            dot: "#e91e8c"
+        }, {
+            label: "Revenue",
+            val: "₱" + revenue.toLocaleString(),
+            bg: "#fce4ec",
+            dot: "#e91e8c"
+        }, {
+            label: "Popular cakes",
+            val: popular ? popular[0] : "—",
+            bg: "#fce4ec",
+            dot: "#e91e8c"
+        }, {
+            label: "Birthday cakes",
+            val: birthday,
+            bg: "#fce4ec",
+            dot: "#f06292"
+        }, {
+            label: "Pending orders",
+            val: pending,
+            bg: "#fff3e0",
+            dot: "#fb8c00"
+        }, ];
+        document.getElementById("statRow").innerHTML = stats.map(s => `
+    <div class="stat-chip">
+      <div class="stat-icon" style="background:${s.bg};"><div style="width:8px;height:8px;border-radius:50%;background:${s.dot};"></div></div>
+      <span class="stat-label">${s.label}</span>
+      <span class="stat-val">${s.val}</span>
+    </div>`).join("");
+    }
+
+    function buildChart() {
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let data = months.map((_, i) => {
+            return orders.filter(o => o.date.getMonth() === i).length;
+        });
+        new Chart(document.getElementById("salesChart"), {
+            type: "line",
+            data: {
+                labels: months,
+                datasets: [{
+                    label: "Orders",
+                    data: data,
+                    borderColor: "#e91e8c",
+                    backgroundColor: "rgba(233,30,140,0.08)",
+                    borderWidth: 2,
+                    pointBackgroundColor: "#e91e8c",
+                    pointRadius: 3,
+                    pointHoverRadius: 5,
+                    tension: 0.35,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => " " + ctx.parsed.y + " orders"
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: "rgba(0,0,0,0.05)"
+                        },
+                        ticks: {
+                            font: {
+                                size: 11
+                            },
+                            color: "#888"
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: "rgba(0,0,0,0.05)"
+                        },
+                        ticks: {
+                            font: {
+                                size: 11
+                            },
+                            color: "#888"
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    let curFilter = "all";
+    let curPage = 1;
+    const PER = 7;
+
+    function renderFilter() {
+        let fs = ["all", "done", "pending", "baking"];
+        let labels = {
+            all: "All",
+            done: "Picked up",
+            pending: "Pending",
+            baking: "Baking"
+        };
+        document.getElementById("fRow").innerHTML = fs.map(f => `
+    <button class="fbtn${curFilter===f?" on":""}" onclick="setF('${f}')">${labels[f]}</button>`).join("");
+    }
+
+    function setF(f) {
+        curFilter = f;
+        curPage = 1;
+        renderFilter();
+        render();
+    }
+
+    function render() {
+        let q = document.getElementById("srch").value.toLowerCase();
+        let filtered = orders.filter(o => {
+            let mf = curFilter === "all" || o.status === curFilter;
+            let mq = !q || o.customer.toLowerCase().includes(q) || o.cake.toLowerCase().includes(q);
+            return mf && mq;
+        });
+        let total = filtered.length;
+        let pages = Math.ceil(total / PER) || 1;
+        if (curPage > pages) curPage = pages;
+        let start = (curPage - 1) * PER;
+        let slice = filtered.slice(start, start + PER);
+
+        function statusIcon(s) {
+            if (s === "done") return `<div class="status-icon si-done"><div class="si-check"></div></div>`;
+            if (s === "pending") return `<div class="status-icon si-pend"><div class="si-pend-dot"></div></div>`;
+            return `<div class="status-icon si-bake"><div class="si-bake-dot"></div></div>`;
+        }
+
+        document.getElementById("tbody").innerHTML = slice.map(o => `
+    <tr>
+      <td style="font-weight:500;">${o.customer}</td>
+      <td>${o.cake}</td>
+      <td style="color:var(--color-text-secondary);">${o.dateStr}</td>
+      <td style="color:var(--color-text-secondary);">${o.time}</td>
+      <td style="font-weight:500;">₱${o.total.toLocaleString()}</td>
+      <td>${statusIcon(o.status)}</td>
+      <td><div class="more-btn"><div class="more-dot"></div><div class="more-dot"></div><div class="more-dot"></div></div></td>
+    </tr>`).join("");
+
+        document.getElementById("pgInfo").textContent = `${start+1}–${Math.min(start+PER,total)} of ${total}`;
+        let btns = "";
+        for (let i = 1; i <= pages; i++) {
+            if (pages <= 6 || i === 1 || i === pages || Math.abs(i - curPage) <= 1) {
+                btns += `<button class="pg-btn${i===curPage?" on":""}" onclick="goP(${i})">${i}</button>`;
+            } else if (Math.abs(i - curPage) === 2) {
+                btns += `<span style="font-size:11px;padding:3px 2px;color:var(--color-text-secondary);">…</span>`;
+            }
+        }
+        document.getElementById("pgBtns").innerHTML = btns;
+    }
+
+    function goP(p) {
+        curPage = p;
+        render();
+    }
+
+    renderStats();
+    renderFilter();
+    render();
+    buildChart();
+</script>
+{% endblock %}

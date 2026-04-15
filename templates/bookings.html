@@ -13,7 +13,9 @@
             <p><strong>Address:</strong> {{ b.address }}</p>{% endif %} {% if b.social %}
             <p><strong>Social:</strong> {{ b.social }}</p>{% endif %} {% if b.event_date %}
             <p><strong>Event Date:</strong> {{ b.event_date }}</p>{% endif %} {% if b.event_time %}
-            <p><strong>Event Time:</strong> {{ b.event_time }}</p>{% endif %} {% if b.notes %}
+            <p><strong>Event Time:</strong> {{ b.event_time }}</p>{% endif %} {% if b.cake_type %}
+            <p><strong>Cake Type:</strong> {{ b.cake_type }}</p>{% endif %} {% if b.total %}
+            <p><strong>Total:</strong> ₱{{ b.total }}</p>{% endif %} {% if b.notes %}
             <p><strong>Notes:</strong> {{ b.notes }}</p>{% endif %}
         </div>
         {% endfor %}

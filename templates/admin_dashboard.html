@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Liza's Cake House</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* SIDEBAR */
+        
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, #e91e8c 0%, #d91a7d 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .sidebar-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .sidebar-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .sidebar-nav {
+            flex: 1;
+            padding: 24px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left-color: white;
+        }
+        
+        .sidebar-link.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            border-left-color: white;
+            font-weight: 500;
+        }
+        
+        .sidebar-link i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        /* MAIN CONTENT */
+        
+        .main-container {
+            flex: 1;
+            margin-left: 250px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        /* TOP HEADER */
+        
+        .top-header {
+            background: white;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background-color: #f5f5f5;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #666;
+        }
+        /* CONTENT AREA */
+        
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 24px;
+        }
+        /* STATS ROW */
+        
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .stat-chip {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-chip:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: #e91e8c;
+        }
+        
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .stat-content {
+            flex: 1;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #999;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 4px;
+        }
+        /* CHART CARD */
+        
+        .chart-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        
+        .chart-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+        }
+        /* ORDERS CARD */
+        
+        .orders-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        
+        .orders-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .orders-header h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .search-box {
+            padding: 8px 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            font-size: 13px;
+            background: white;
+            color: #666;
+        }
+        
+        .search-box::placeholder {
+            color: #aaa;
+        }
+        /* FILTER BUTTONS */
+        
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 6px 12px;
+            border: 1px solid #d0d0d0;
+            background: white;
+            color: #666;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover {
+            border-color: #e91e8c;
+            color: #e91e8c;
+        }
+        
+        .filter-btn.active {
+            background-color: #e91e8c;
+            color: white;
+            border-color: #e91e8c;
+        }
+        /* TABLE */
+        
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        
+        thead {
+            background-color: #f9f9f9;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+        }
+        
+        tr:hover {
+            background-color: #fafafa;
+        }
+        /* STATUS BADGES */
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-done {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .status-pending {
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .status-baking {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        
+        .status-dot.done {
+            background-color: #2e7d32;
+        }
+        
+        .status-dot.pending {
+            background-color: #f57c00;
+        }
+        
+        .status-dot.baking {
+            background-color: #1565c0;
+        }
+        /* PAGINATION */
+        
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .pagination-info {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .pagination-buttons {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .pagination-btn {
+            padding: 6px 8px;
+            border: 1px solid #d0d0d0;
+            background: white;
+            color: #666;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination-btn:hover {
+            border-color: #e91e8c;
+            color: #e91e8c;
+        }
+        
+        .pagination-btn.active {
+            background-color: #e91e8c;
+            color: white;
+            border-color: #e91e8c;
+        }
+        /* RESPONSIVE */
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            .main-container {
+                margin-left: 200px;
+            }
+            .stat-row {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .content {
+                padding: 16px;
+            }
+            .page-title {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .sidebar {
+                width: 0;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .main-container {
+                margin-left: 0;
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .stat-row {
+                grid-template-columns: 1fr;
+            }
+            .orders-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-box {
+                width: 100%;
+            }
+        }
+        /* SCROLLBAR */
+        
+        .sidebar::-webkit-scrollbar,
+        .content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track,
+        .content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb,
+        .content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb:hover,
+        .content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .content::-webkit-scrollbar-thumb {
+            background: rgba(233, 30, 140, 0.3);
+        }
+        
+        .content::-webkit-scrollbar-thumb:hover {
+            background: rgba(233, 30, 140, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">🎂</div>
+            <div class="sidebar-title">Admin</div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/admin/dashboard" class="sidebar-link active">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="/admin/orders" class="sidebar-link">
+                <i class="fas fa-box"></i>
+                <span>Orders</span>
+            </a>
+            <a href="/admin/calendar" class="sidebar-link">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Calendar</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-container">
+        <!-- TOP HEADER -->
+        <header class="top-header">
+            <div class="header-left">
+                <h1 class="header-title">Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <i class="fas fa-user-circle" style="font-size: 18px; color: #e91e8c;"></i>
+                    <span>{{ user.name }}</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <h2 class="page-title">Admin Dashboard</h2>
+
+            <!-- STATS ROW -->
+            <div class="stat-row" id="statRow"></div>
+
+            <!-- CHART CARD -->
+            <div class="chart-card">
+                <h3 class="chart-title">Sales Overview</h3>
+                <div class="chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+
+            <!-- ORDERS CARD -->
+            <div class="orders-card">
+                <div class="orders-header">
+                    <h2>Recent Orders</h2>
+                    <input type="text" id="srch" class="search-box" placeholder="Search customer or cake...">
+                </div>
+                <div class="filter-row" id="fRow"></div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 120px;">Customer</th>
+                                <th style="width: 120px;">Cake Type</th>
+                                <th style="width: 100px;">Pickup Date</th>
+                                <th style="width: 100px;">Pickup Time</th>
+                                <th style="width: 80px;">Total</th>
+                                <th style="width: 90px;">Status</th>
+                                <th style="width: 60px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <span class="pagination-info" id="pgInfo"></span>
+                    <div class="pagination-buttons" id="pgBtns"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <script>
+        const customers = ["Zse Secretario", "Belle Bravo", "Tim Tapado", "Carlo Watson", "John Santos", "Ana Reyes", "Maria Lim", "Grace Uy", "Rico Bautista", "Cris Navarro", "Diana Lopez", "Felix Cruz", "Iris Gomez", "Leo Padilla", "Joy Flores", "Noel Cruz", "Sam Abad", "Tina Vega", "Paz Torres", "Mark Aquino"];
+        const cakeTypes = ["Birthday", "Customized", "Wedding", "Christening", "Anniversary", "Graduation", "Debut", "Baby Shower"];
+        const pickupTimes = ["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM"];
+        const statuses = ["done", "pending", "baking"];
+        const sw = [0.5, 0.3, 0.2];
+
+        function ri(a, b) {
+            return Math.floor(Math.random() * (b - a + 1)) + a;
+        }
+
+        function rc(a) {
+            return a[Math.floor(Math.random() * a.length)];
+        }
+
+        function wSt() {
+            let r = Math.random(),
+                c = 0;
+            for (let i = 0; i < statuses.length; i++) {
+                c += sw[i];
+                if (r < c) return statuses[i];
+            }
+            return "done";
+        }
+
+        let orders = {
+            {
+                recent_orders | tojson
+            }
+        };
+        orders = orders.map(o => ({
+            id: o.id || Math.random(),
+            customer: o.name || 'Unknown',
+            cake: o.cake_type || 'Birthday',
+            dateStr: o.event_date ? new Date(o.event_date).toLocaleDateString('en-US', {
+                month: '2-digit',
+                day: '2-digit',
+                year: '2-digit'
+            }) : '—',
+            date: o.event_date ? new Date(o.event_date) : new Date(),
+            time: o.event_time || '—',
+            total: o.total || ri(400, 3500),
+            status: o.status || wSt()
+        }));
+
+        function renderStats() {
+            let total = orders.length;
+            let revenue = orders.filter(o => o.status !== "cancelled").reduce((s, o) => s + o.total, 0);
+            let popular = Object.entries(orders.reduce((m, o) => {
+                m[o.cake] = (m[o.cake] || 0) + 1;
+                return m;
+            }, {})).sort((a, b) => b[1] - a[1])[0];
+            let birthday = orders.filter(o => o.cake === "Birthday").length;
+            let pending = orders.filter(o => o.status === "pending").length;
+            let stats = [{
+                label: "Total Bookings",
+                val: total,
+                icon: "📦",
+                color: "#e91e8c"
+            }, {
+                label: "Revenue",
+                val: "₱" + revenue.toLocaleString(),
+                icon: "💰",
+                color: "#4caf50"
+            }, {
+                label: "Popular Cake",
+                val: popular ? popular[0] : "—",
+                icon: "🍰",
+                color: "#ff9800"
+            }, {
+                label: "Birthday Orders",
+                val: birthday,
+                icon: "🎂",
+                color: "#2196f3"
+            }, {
+                label: "Pending Orders",
+                val: pending,
+                icon: "⏳",
+                color: "#f57c00"
+            }, ];
+            document.getElementById("statRow").innerHTML = stats.map(s => `
+                <div class="stat-chip">
+                    <div class="stat-icon" style="background-color: ${s.color}20; color: ${s.color}; font-size: 24px;">${s.icon}</div>
+                    <div class="stat-content">
+                        <div class="stat-label">${s.label}</div>
+                        <div class="stat-value">${s.val}</div>
+                    </div>
+                </div>`).join("");
+        }
+
+        function buildChart() {
+            let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            let data = months.map((_, i) => {
+                return orders.filter(o => o.date.getMonth() === i).length;
+            });
+            new Chart(document.getElementById("salesChart"), {
+                type: "line",
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: "Orders",
+                        data: data,
+                        borderColor: "#e91e8c",
+                        backgroundColor: "rgba(233,30,140,0.08)",
+                        borderWidth: 2.5,
+                        pointBackgroundColor: "#e91e8c",
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => " " + ctx.parsed.y + " orders"
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: "rgba(0,0,0,0.05)"
+                            },
+                            ticks: {
+                                font: {
+                                    size: 12
+                                },
+                                color: "#999"
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: "rgba(0,0,0,0.05)"
+                            },
+                            ticks: {
+                                font: {
+                                    size: 12
+                                },
+                                color: "#999"
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        let curFilter = "all";
+        let curPage = 1;
+        const PER = 8;
+
+        function renderFilter() {
+            let fs = ["all", "done", "pending", "baking"];
+            let labels = {
+                all: "All",
+                done: "Picked Up",
+                pending: "Pending",
+                baking: "Baking"
+            };
+            document.getElementById("fRow").innerHTML = fs.map(f => `
+                <button class="filter-btn${curFilter === f ? " active" : ""}" onclick="setF('${f}')">${labels[f]}</button>`).join("");
+        }
+
+        function setF(f) {
+            curFilter = f;
+            curPage = 1;
+            renderFilter();
+            render();
+        }
+
+        function render() {
+            let q = document.getElementById("srch").value.toLowerCase();
+            let filtered = orders.filter(o => {
+                let mf = curFilter === "all" || o.status === curFilter;
+                let mq = !q || o.customer.toLowerCase().includes(q) || o.cake.toLowerCase().includes(q);
+                return mf && mq;
+            });
+            let total = filtered.length;
+            let pages = Math.ceil(total / PER) || 1;
+            if (curPage > pages) curPage = pages;
+            let start = (curPage - 1) * PER;
+            let slice = filtered.slice(start, start + PER);
+
+            function statusBadge(s) {
+                let config = {
+                    done: {
+                        label: 'Picked Up',
+                        class: 'status-done'
+                    },
+                    pending: {
+                        label: 'Pending',
+                        class: 'status-pending'
+                    },
+                    baking: {
+                        label: 'Baking',
+                        class: 'status-baking'
+                    }
+                };
+                let c = config[s] || config.done;
+                let dotClass = s === 'done' ? 'done' : s === 'pending' ? 'pending' : 'baking';
+                return `<span class="status-badge ${c.class}"><span class="status-dot ${dotClass}"></span>${c.label}</span>`;
+            }
+
+            document.getElementById("tbody").innerHTML = slice.map(o => `
+                <tr>
+                    <td><strong>${o.customer}</strong></td>
+                    <td>${o.cake}</td>
+                    <td>${o.dateStr}</td>
+                    <td>${o.time}</td>
+                    <td><strong>₱${o.total.toLocaleString()}</strong></td>
+                    <td>${statusBadge(o.status)}</td>
+                    <td><button style="color: #e91e8c; background: none; border: none; cursor: pointer; font-size: 16px;">⋮</button></td>
+                </tr>`).join("");
+
+            document.getElementById("pgInfo").textContent = `${start + 1}–${Math.min(start + PER, total)} of ${total}`;
+            let btns = "";
+            for (let i = 1; i <= pages; i++) {
+                if (pages <= 6 || i === 1 || i === pages || Math.abs(i - curPage) <= 1) {
+                    btns += `<button class="pagination-btn${i === curPage ? " active" : ""}" onclick="goP(${i})">${i}</button>`;
+                } else if (Math.abs(i - curPage) === 2) {
+                    btns += `<span style="padding: 0 4px; color: #999;">…</span>`;
+                }
+            }
+            document.getElementById("pgBtns").innerHTML = btns;
+        }
+
+        function goP(p) {
+            curPage = p;
+            render();
+        }
+
+        renderStats();
+        renderFilter();
+        render();
+        buildChart();
+    </script>
+</body>
+
+</html>
